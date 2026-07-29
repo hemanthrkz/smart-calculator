@@ -1,0 +1,156 @@
+/* Floating Widgets & Window Management System */
+
+.widget-window {
+  position: absolute;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 320px;
+  min-height: 240px;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.widget-window.active-window {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.25);
+  z-index: 50;
+}
+
+.widget-window.pinned {
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.widget-window.minimized {
+  display: none !important;
+}
+
+/* Window Header */
+.widget-header {
+  height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  cursor: grab;
+  user-select: none;
+}
+
+.widget-header:active {
+  cursor: grabbing;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.widget-title-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.widget-icon {
+  font-size: 15px;
+  color: var(--primary-glow);
+  display: flex;
+  align-items: center;
+}
+
+.widget-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.widget-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--primary-glow);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Controls */
+.widget-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.w-control-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.w-control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.w-control-btn.close-btn:hover {
+  background: rgba(244, 63, 94, 0.8);
+  color: #fff;
+}
+
+.w-control-btn.pin-btn.active {
+  color: var(--accent-gold);
+  background: rgba(251, 191, 36, 0.2);
+}
+
+/* Window Content Body */
+.widget-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Resize Handles */
+.resize-handle {
+  position: absolute;
+  z-index: 100;
+}
+.resize-handle.r-right {
+  top: 0; right: 0; width: 6px; height: 100%; cursor: e-resize;
+}
+.resize-handle.r-bottom {
+  bottom: 0; left: 0; width: 100%; height: 6px; cursor: s-resize;
+}
+.resize-handle.r-corner {
+  bottom: 0; right: 0; width: 14px; height: 14px; cursor: se-resize;
+}
+.resize-handle.r-corner::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--text-dim);
+  border-bottom: 2px solid var(--text-dim);
+}

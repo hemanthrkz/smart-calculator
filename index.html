@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Intelligence Studio | Think Beyond Numbers</title>
+  <meta name="description" content="Futuristic interactive mathematical workspace combining AI calculator, visual learning system, graph studio, equation solver, finance toolkit, unit universe, and health analytics.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>∑</text></svg>">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/widgets.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <!-- Ambient Particle Mesh Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="aurora-bg"></div>
+
+  <!-- App Wrapper -->
+  <div id="app-container">
+    
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+      <div class="brand-section">
+        <div class="brand-icon">∑</div>
+        <div>
+          <h1 class="brand-title">MATH INTELLIGENCE</h1>
+          <div class="brand-tagline">Think Beyond Numbers</div>
+        </div>
+      </div>
+
+      <!-- Workspace Tabs -->
+      <div class="nav-center">
+        <div class="workspace-tab active" data-ws="0">
+          <span>⚡ Main Workspace</span>
+        </div>
+        <div class="workspace-tab" data-ws="1">
+          <span>📈 Analytics & Finance</span>
+        </div>
+        <div class="workspace-tab" data-ws="2">
+          <span>🔬 Geometry & Graph Lab</span>
+        </div>
+        <button class="icon-btn" id="btn-add-ws" title="New Workspace">+</button>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div class="nav-actions">
+        <button class="icon-btn voice-btn" id="btn-voice-toggle" title="Voice Intelligence (Click to Speak)">
+          🎙️
+        </button>
+        <button class="icon-btn" id="btn-export-ws" title="Export Workspace (Screenshot/CSV)">
+          📸
+        </button>
+        <button class="icon-btn" id="btn-theme-modal" title="Theme Designer">
+          🎨
+        </button>
+        <button class="icon-btn" id="btn-shortcuts-modal" title="Keyboard Shortcuts">
+          ⌨️
+        </button>
+        <button class="icon-btn" id="btn-tour-start" title="Interactive Onboarding Tour">
+          ❓
+        </button>
+      </div>
+    </header>
+
+    <!-- Floating Windows Workspace Viewport -->
+    <main id="workspace-viewport">
+      <!-- Dynamic Floating Widgets will be mounted here by workspace.js -->
+    </main>
+
+    <!-- Bottom Module Launcher Dock -->
+    <footer class="bottom-dock">
+      <div class="dock-item" data-module="calculator">
+        <span class="dock-icon">🧮</span>
+        <span>AI Calc</span>
+      </div>
+      <div class="dock-item" data-module="grapher">
+        <span class="dock-icon">📈</span>
+        <span>Graph Studio</span>
+      </div>
+      <div class="dock-item" data-module="geometry">
+        <span class="dock-icon">📐</span>
+        <span>Geometry Lab</span>
+      </div>
+      <div class="dock-item" data-module="formulas">
+        <span class="dock-icon">📚</span>
+        <span>Formulas</span>
+      </div>
+      <div class="dock-item" data-module="equation_solver">
+        <span class="dock-icon">⚛️</span>
+        <span>Eq Solver</span>
+      </div>
+      <div class="dock-item" data-module="finance">
+        <span class="dock-icon">💎</span>
+        <span>Finance</span>
+      </div>
+      <div class="dock-item" data-module="health">
+        <span class="dock-icon">🩺</span>
+        <span>Health</span>
+      </div>
+      <div class="dock-item" data-module="unit_universe">
+        <span class="dock-icon">🌌</span>
+        <span>Unit Universe</span>
+      </div>
+      <div class="dock-item" data-module="notebook">
+        <span class="dock-icon">📝</span>
+        <span>Notebook</span>
+      </div>
+      <div class="dock-item" data-module="history">
+        <span class="dock-icon">⏱️</span>
+        <span>History</span>
+      </div>
+      <div class="dock-item" data-module="gamification">
+        <span class="dock-icon">🏆</span>
+        <span>Challenges</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Modal: Theme Designer -->
+  <div class="modal-overlay" id="modal-theme">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🎨 Theme & Aesthetic Customizer</h3>
+        <button class="modal-close" data-close="modal-theme">&times;</button>
+      </div>
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:16px;">
+        <div class="input-group">
+          <label class="input-label">Select Color Preset</label>
+          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
+            <button class="studio-btn secondary theme-preset-btn" data-theme="cyberpunk">⚡ Cyberpunk Neon</button>
+            <button class="studio-btn secondary theme-preset-btn" data-theme="apple"> Apple Dark Slate</button>
+            <button class="studio-btn secondary theme-preset-btn" data-theme="hyperion">✨ Hyperion Gold</button>
+            <button class="studio-btn secondary theme-preset-btn" data-theme="deepspace">🌌 Deep Space Blue</button>
+            <button class="studio-btn secondary theme-preset-btn" data-theme="matrix">🟢 Matrix Emerald</button>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Custom Primary Accent Color</label>
+          <input type="color" id="theme-color-picker" value="#6366f1" style="width:100%; height:40px; border-radius:8px; border:none; cursor:pointer;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Keyboard Shortcuts -->
+  <div class="modal-overlay" id="modal-shortcuts">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">⌨️ Workspace Shortcuts</h3>
+        <button class="modal-close" data-close="modal-shortcuts">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:13px;">
+          <div class="timeline-card"><span>Open AI Calculator</span><code class="step-val">Alt + C</code></div>
+          <div class="timeline-card"><span>Open Graph Studio</span><code class="step-val">Alt + G</code></div>
+          <div class="timeline-card"><span>Toggle Voice Intelligence</span><code class="step-val">Alt + V</code></div>
+          <div class="timeline-card"><span>Switch Workspace Tab</span><code class="step-val">Alt + 1 / 2 / 3</code></div>
+          <div class="timeline-card"><span>Export Workspace</span><code class="step-val">Ctrl + E</code></div>
+          <div class="timeline-card"><span>Clear Focused Input</span><code class="step-val">Esc</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Export Workspace -->
+  <div class="modal-overlay" id="modal-export">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📸 Export & Share Studio</h3>
+        <button class="modal-close" data-close="modal-export">&times;</button>
+      </div>
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:14px;">
+        <p style="font-size:13px; color:var(--text-muted);">Export your current mathematical workspace or calculation history into high-resolution formats.</p>
+        <button class="studio-btn" id="export-screenshot-btn">📷 Capture Workspace Screenshot</button>
+        <button class="studio-btn secondary" id="export-csv-btn">📊 Export Calculation History (CSV)</button>
+        <button class="studio-btn secondary" id="export-json-btn">💾 Backup Workspace Data (JSON)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/app.js"></script>
+  <script src="js/workspace.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/tour.js"></script>
+
+  <script src="js/modules/calculator.js"></script>
+  <script src="js/modules/grapher.js"></script>
+  <script src="js/modules/geometry.js"></script>
+  <script src="js/modules/formulas.js"></script>
+  <script src="js/modules/equation_solver.js"></script>
+  <script src="js/modules/finance.js"></script>
+  <script src="js/modules/health.js"></script>
+  <script src="js/modules/unit_universe.js"></script>
+  <script src="js/modules/notebook.js"></script>
+  <script src="js/modules/history.js"></script>
+  <script src="js/modules/gamification.js"></script>
+  <script src="js/modules/export.js"></script>
+</body>
+</html>
